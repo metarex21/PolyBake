@@ -1,5 +1,5 @@
 bl_info = {
-    "name": "BlendBaker",
+    "name": "PolyBake",
     "category": "3D View",
     "blender": (3, 00, 0),
     "author": "metarex21",
