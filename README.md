@@ -1,6 +1,6 @@
-# BlendBaker Addon
+# PolyBake Addon
 
-BlendBaker is a powerful Blender addon that simplifies the process of baking high-poly mesh details onto a low-poly mesh. It supports various baking options, including tangent normals, object normals, color, roughness, occlusion, and UV wireframe. With BlendBaker, you can quickly generate texture maps for your models, making it ideal for game development, visualization, and more.
+PolyBake is a powerful Blender addon that simplifies the process of baking high-poly mesh details onto a low-poly mesh. It supports various baking options, including tangent normals, object normals, color, roughness, occlusion, and UV wireframe. With PolyBake, you can quickly generate texture maps for your models, making it ideal for game development, visualization, and more.
 
 ## Features
 
@@ -17,7 +17,7 @@ BlendBaker is a powerful Blender addon that simplifies the process of baking hig
 3. Go to `Edit` > `Preferences`.
 4. Click on the `Add-ons` tab.
 5. Click `Install...` and select the downloaded addon ZIP file.
-6. Enable the "BlendBaker" addon by checking the checkbox next to it.
+6. Enable the "PolyBake" addon by checking the checkbox next to it.
 
 ## Usage
 
@@ -34,10 +34,10 @@ If you find any issues or have suggestions for improvements, feel free to create
 
 ## License
 
-BlendBaker is licensed under the [MIT License](link-to-license).
+PolyBake is licensed under the [MIT License](link-to-license).
 
 ## Support
 
 If you need any help or have questions, please reach out to us via [email@example.com](mailto:email@example.com) or open an issue.
 
-Happy baking with BlendBaker!
+Happy baking with PolyBake!
