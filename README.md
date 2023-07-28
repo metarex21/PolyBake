@@ -12,7 +12,7 @@ PolyBake is a powerful Blender addon that simplifies the process of baking high-
 
 ## Installation
 
-1. Download the latest release from the [Releases](link-to-releases) page.
+1. Download the latest release from the [Releases](https://github.com/metarex21/PolyBake/releases) page.
 2. Open Blender.
 3. Go to `Edit` > `Preferences`.
 4. Click on the `Add-ons` tab.
