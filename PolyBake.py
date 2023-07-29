@@ -28,12 +28,12 @@ def hide(objectType):
         objectType.hide_viewport = True
 
 
-class BlendBakerUIPanel(bpy.types.Panel):
-    """BlendBakerUIPanel Panel"""
-    bl_label = "BlendBaker"
+class PolyBakeUIPanel(bpy.types.Panel):
+    """PolyBakeUIPanel Panel"""
+    bl_label = "PolyBake"
     bl_space_type = 'VIEW_3D'
     bl_region_type = "UI"
-    bl_category = "BlendBaker"
+    bl_category = "PolyBake"
 
 
     def draw_header(self, _):
@@ -218,7 +218,7 @@ class BlendBakerUIPanel(bpy.types.Panel):
 
 
 
-class BlendBakerUIToggle(bpy.types.Operator):
+class PolyBakeUIToggle(bpy.types.Operator):
     """toggle lowpoly/hipoly"""
     bl_idname = "brm.bakeuitoggle"
     bl_label = "Toggle"
@@ -257,7 +257,7 @@ class BlendBakerUIToggle(bpy.types.Operator):
 
 
 
-class BlendBakerUIIncrement(bpy.types.Operator):
+class PolyBakeUIIncrement(bpy.types.Operator):
     """multiply/divide value"""
     bl_idname = "brm.bakeuiincrement"
     bl_label = "increment"
@@ -286,7 +286,7 @@ class BlendBakerUIIncrement(bpy.types.Operator):
 
 
 
-class BlendBakerUIHide(bpy.types.Operator):
+class PolyBakeUIHide(bpy.types.Operator):
     """hide object"""
     bl_idname = "brm.bakeuihide"
     bl_label = "hide"
@@ -353,7 +353,7 @@ class BlendBakerUIHide(bpy.types.Operator):
 
 
 
-class BlendBaker(bpy.types.Operator):
+class PolyBake(bpy.types.Operator):
     """Bake and save textures"""
     bl_idname = "brm.bake"
     bl_label = "set normal"
@@ -740,11 +740,11 @@ class BlendBaker(bpy.types.Operator):
 
 
 classes = (
-        BlendBaker,
-        BlendBakerUIHide,
-        BlendBakerUIPanel,
-        BlendBakerUIToggle,
-        BlendBakerUIIncrement,
+        PolyBake,
+        PolyBakeUIHide,
+        PolyBakeUIPanel,
+        PolyBakeUIToggle,
+        PolyBakeUIIncrement,
     )
 
 def register():
