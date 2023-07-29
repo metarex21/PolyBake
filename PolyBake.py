@@ -1,10 +1,12 @@
 bl_info = {
     "name": "PolyBake",
     "category": "3D View",
+    "version": (1, 0, 1),
     "blender": (3, 00, 0),
     "author": "metarex21",
-    "description": "Fast texture baking UI in 3D View Sidebar under 'bake'.."
-    }
+    "description": "Fast texture baking UI in 3D View Sidebar under 'bake'..",
+    "website": "https://github.com/metarex21/PolyBake" 
+}
 
 import bpy
 import os
@@ -660,6 +662,7 @@ class PolyBake(bpy.types.Operator):
                     context.scene.hipoly.hide_viewport = True
 
         return {'FINISHED'}
+
 
 
 
