@@ -88,21 +88,16 @@ class PolyBakeUIPanel(bpy.types.Panel):
         col = box.column(align=True)
         row = col.row(align = True)
         row.operator("brm.bakeuitoggle", text="Toggle hi/low", icon="FILE_REFRESH")
-        #row.prop(context.scene, "UseBlenderGame", icon="MESH_UVSPHERE", text="")
+        
 
         col = layout.column(align=True)
 
         col.separator()
         row = col.row(align = True)
         row.prop(context.scene.render.bake, "cage_extrusion", text="Ray Distance")
-        #row.prop(context.scene, "cageEnabled", icon="OBJECT_DATAMODE", text="")
+        
         row = col.row(align = True)
-        #row.enabled = context.scene.cageEnabled
-        
-        #if context.scene.cageEnabled:
-        #    op = row.prop_search(context.scene, "cage", bpy.data, "objects", text="", icon="MESH_UVSPHERE")
-        #op.enabled = context.scene.cageEnabled
-        
+       
         col.separator()
 
         box = layout.box()
@@ -138,7 +133,7 @@ class PolyBakeUIPanel(bpy.types.Panel):
         col = box.column(align=True)
         
         row = col.row(align = True)
-        #row.enabled = not context.scene.UseLowOnly
+        
         
         if not context.scene.bakeNormal:
             row.prop(context.scene, "bakeNormal", icon="SHADING_RENDERED", text="Tangent Normal")
@@ -148,7 +143,7 @@ class PolyBakeUIPanel(bpy.types.Panel):
             row.prop(context.scene, "samplesNormal", text="")
 
         row = col.row(align = True)
-        #row.enabled = not context.scene.UseLowOnly
+        
         if not context.scene.bakeObject:
             row.prop(context.scene, "bakeObject", icon="SHADING_RENDERED", text="Object Normal")
         if context.scene.bakeObject:
@@ -165,7 +160,7 @@ class PolyBakeUIPanel(bpy.types.Panel):
             row.prop(context.scene, "samplesAO", text="")
         
         row = col.row(align = True)
-        #row.enabled = not context.scene.UseLowOnly
+        
         if not context.scene.bakeColor:
             row.prop(context.scene, "bakeColor", icon="SHADING_TEXTURE", text="Color")
         if context.scene.bakeColor:
@@ -174,7 +169,7 @@ class PolyBakeUIPanel(bpy.types.Panel):
             row.prop(context.scene, "samplesColor", text="")
 
         row = col.row(align = True)
-        #row.enabled = not context.scene.UseLowOnly
+        
         if not context.scene.bakeRoughness:
             row.prop(context.scene, "bakeRoughness", icon="SHADING_TEXTURE", text="Roughness")
         if context.scene.bakeRoughness:
@@ -183,7 +178,7 @@ class PolyBakeUIPanel(bpy.types.Panel):
             row.prop(context.scene, "samplesRoughness", text="")
             
         row = col.row(align = True)
-        #row.enabled = not context.scene.UseLowOnly
+        
         if not context.scene.bakeEmission:
             row.prop(context.scene, "bakeEmission", icon="SHADING_TEXTURE", text="Emission")
         if context.scene.bakeEmission:
@@ -208,16 +203,6 @@ class PolyBakeUIPanel(bpy.types.Panel):
         row.prop(context.scene, "UseLowOnly", icon="MESH_ICOSPHERE", text="")
         
 
-
-
-
-
-
-
-
-
-
-
 class PolyBakeUIToggle(bpy.types.Operator):
     """toggle lowpoly/hipoly"""
     bl_idname = "brm.bakeuitoggle"
@@ -229,7 +214,7 @@ class PolyBakeUIToggle(bpy.types.Operator):
         if bpy.context.object.mode == 'EDIT':
             bpy.ops.object.mode_set(mode='OBJECT')
 
-        #test lowpoly/hipoly exists
+        
 
         if context.scene.lowpoly is None and not context.scene.lowpoly in bpy.data.collections:
             self.report({'WARNING'}, "Select a valid lowpoly object or group!")
@@ -253,10 +238,6 @@ class PolyBakeUIToggle(bpy.types.Operator):
 
 
 
-
-
-
-
 class PolyBakeUIIncrement(bpy.types.Operator):
     """multiply/divide value"""
     bl_idname = "brm.bakeuiincrement"
@@ -277,15 +258,6 @@ class PolyBakeUIIncrement(bpy.types.Operator):
 
 
 
-
-
-
-
-
-
-
-
-
 class PolyBakeUIHide(bpy.types.Operator):
     """hide object"""
     bl_idname = "brm.bakeuihide"
@@ -297,16 +269,16 @@ class PolyBakeUIHide(bpy.types.Operator):
     def execute(self, context):
 
 
-        #test if collection:
+        
         if context.scene.hipoly.bl_rna.name == "Collection":
             print("i am a collection!")
 
         if context.scene.hipoly.bl_rna.name == "Object":
             print("i am an object!")
-        #print(context.scene.hipoly)
-        #print(context.scene.lowpoly)
+        
+        
 
-        #test lowpoly/hipoly exists
+        
         if bpy.context.object.mode == 'EDIT':
             bpy.ops.object.mode_set(mode='OBJECT')
         
@@ -343,16 +315,6 @@ class PolyBakeUIHide(bpy.types.Operator):
 
 
 
-
-
-
-
-
-
-
-
-
-
 class PolyBake(bpy.types.Operator):
     """Bake and save textures"""
     bl_idname = "brm.bake"
@@ -362,15 +324,15 @@ class PolyBake(bpy.types.Operator):
 
     def execute(self, context):  
         
-        #test if everything is set up OK first:
-        #test folder
+        
+        
         hasfolder = os.access(context.scene.bakeFolder, os.W_OK)
         if hasfolder is False:
             self.report({'WARNING'}, "Select a valid export folder!")
             return {'FINISHED'}
 
         
-        #test lowpoly/hipoly/cage exists
+        
         
         if context.scene.lowpoly is None and not context.scene.lowpoly in bpy.data.collections:
             self.report({'WARNING'}, "Select a valid lowpoly object or collection!")
@@ -380,12 +342,8 @@ class PolyBake(bpy.types.Operator):
             self.report({'WARNING'}, "Select a valid hipoly object or collection!")
             return {'FINISHED'}
             
-        #if bpy.data.objects.get(context.scene.cage) is None and context.scene.cageEnabled:
-        #    self.report({'WARNING'}, "Select a valid cage object!")
-        #   return {'FINISHED'}
-
         
-        #test if lowpoly, highpoly and cage objects are actually models
+     
         lowpolymeshes = 0
 
         if context.scene.lowpolyGroup == True:
@@ -419,54 +377,50 @@ class PolyBake(bpy.types.Operator):
             return {'FINISHED'}
 
         
-        #setup
+        
 
-    #HOTFIX get out of local view 
+    
         if context.space_data.local_view:
             bpy.ops.view3d.localview()
 
-    #1 unhide everything to be baked
+    
         if not context.scene.UseLowOnly:
             unhide(context.scene.hipoly)
         unhide(context.scene.lowpoly)
-        bpy.ops.object.hide_view_clear() #temporary until I figure out how hiding is actually handled
+        bpy.ops.object.hide_view_clear() 
         
         
         
-    #2 make sure we are in object mode and nothing is selected
+    
         if bpy.context.object.mode == 'EDIT':
             bpy.ops.object.mode_set(mode='OBJECT')
         bpy.ops.object.select_all(action='DESELECT')
         
         
 
-    #3 setup lowpoly for baking
+    
         lowpolyobject = "null"
         orig_lowpoly = None
         
-        #print("still working")
-        #return {'FINISHED'} 
         
-        #if collection, create temporary lowpoly object
+        
+        
+        
         if context.scene.lowpolyGroup == True:
 
-            #print("still working")
-            #return {'FINISHED'} 
+            
+            
             context.scene.lowpoly.hide_render = False
 
-            #collections crash fix
+            
             low_objects_names = [obj.name for obj in bpy.context.scene.lowpoly.all_objects]
             for o in low_objects_names:
     
-            #for o in bpy.context.scene.lowpoly.all_objects:
-        #if context.scene.lowpoly is None:   
-        #    context.scene.lowpoly.hide_render = False
-        #    for o in context.scene.lowpoly.objects:
         
  
                 if bpy.data.objects[o].type == 'MESH':
-                    #print("its a mesh")
-                    #return {'FINISHED'}  
+                    
+                    
 
                     bpy.data.objects[o].hide_viewport = False    
                     
@@ -476,12 +430,12 @@ class PolyBake(bpy.types.Operator):
                     
                     bpy.data.objects[o].hide_render = True
                     
-            #print(bpy.context.scene.lowpoly.all_objects)
-            #print("still working")
-
-            #return {'FINISHED'}       
             
-            #duplicate selected and combine into new object
+            
+
+            
+            
+            
             bpy.ops.object.duplicate()
             bpy.ops.object.join()
             bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)
@@ -490,7 +444,7 @@ class PolyBake(bpy.types.Operator):
         else:
             bpy.ops.object.select_all(action='DESELECT')
             
-            #context.scene.lowpoly.select_set(state=True)
+            
             context.scene.lowpoly.hide_viewport = False
             context.scene.lowpoly.hide_render = False
             context.scene.lowpoly.select_set(state=True)
@@ -498,17 +452,17 @@ class PolyBake(bpy.types.Operator):
             orig_lowpoly = context.scene.lowpoly
             lowpolyobject = context.scene.lowpoly
             
-        #print("still working")
-        #return {'FINISHED'} 
+        
+        
             
-    # if bake to self, create a temporary lowpoly duplicate to bake self to:
+    
         if context.scene.UseLowOnly:
             bpy.ops.object.duplicate()
             bpy.context.active_object.name = "temp_hipoly"
             context.scene.hipoly = bpy.context.active_object
-            #return {'FINISHED'}
+            
 
-    # test if cage has same tri count:
+    
         if context.scene.cageEnabled:
             vcount_low = len(bpy.data.objects[lowpolyobject].data.vertices)
             vcount_cage = len(bpy.data.objects[context.scene.cage].data.vertices)
@@ -520,35 +474,18 @@ class PolyBake(bpy.types.Operator):
                 self.report({'WARNING'}, "cage and low poly vertex count don't match!")
                 return {'FINISHED'}
 
-    #4 test if lowpoly has a material and UV
-        #if len(context.scene.lowpoly.data.materials) == 0:
-        #    if context.scene.lowpolyGroup:
-        #        bpy.ops.object.select_all(action='DESELECT')
-        #        bpy.data.objects[lowpolyobject].select_set(state=True)
-        #        bpy.ops.object.delete(use_global=False)
-        #    self.report({'WARNING'}, "Material required on low poly mesh!")
-        #    return {'FINISHED'}
-
-        #if len(context.scene.lowpoly.data.uv_layers) == 0:
-        #    if context.scene.lowpolyGroup:
-        #        bpy.ops.object.select_all(action='DESELECT')
-        #        bpy.data.objects[lowpolyobject].select_set(state=True)
-        #        bpy.ops.object.delete(use_global=False)
-        #    self.report({'WARNING'}, "low poly mesh has no UV!")
-        #    return {'FINISHED'}
-
-    #5 remember render engine and switch to CYCLES for baking
+    
         orig_renderer = bpy.data.scenes[bpy.context.scene.name].render.engine
         bpy.data.scenes[bpy.context.scene.name].render.engine = "CYCLES"
 
-    #6 create temporary bake image and material
+    
         bakeimage = bpy.data.images.new("BakeImage", width=context.scene.bakeWidth, height=context.scene.bakeHeight)
         bakemat = bpy.data.materials.new(name="bakemat")
         bakemat.use_nodes = True
         
-    #7 select hipoly target
-        #if not context.scene.UseLowOnly:
-        #select hipoly object or collection:
+    
+        
+        
         if context.scene.hipoly.bl_rna.name == "Collection":
             context.scene.hipoly.hide_render = False
             for o in bpy.context.scene.hipoly.all_objects:
@@ -562,18 +499,18 @@ class PolyBake(bpy.types.Operator):
 
             context.scene.hipoly.select_set(state=True)
 
-    #8 select lowpoly target
+    
         print("whats happening here?")
         print(context.scene.lowpoly)
         print(lowpolyobject)
-        #bpy.context.view_layer.objects.active = bpy.data.objects[lowpolyobject]
-        #print(bpy.data.objects[lowpolyobject])
+        
+        
         if context.scene.lowpolyGroup == True:
             bpy.context.view_layer.objects.active = bpy.data.objects[lowpolyobject]
         else:
             bpy.context.view_layer.objects.active = lowpolyobject
 
-    #9 select lowpoly material and create temporary render target
+    
         orig_mat = bpy.context.active_object.data.materials[0]
         bpy.context.active_object.data.materials[0] = bakemat
         node_tree = bakemat.node_tree
@@ -582,7 +519,7 @@ class PolyBake(bpy.types.Operator):
         node_tree.nodes.active = node
         node.image = bakeimage
 
-    #10 check if theres a cage to be used
+    
         if context.scene.cageEnabled:
             bpy.context.scene.render.bake.use_cage = True
             bpy.context.scene.render.bake.cage_object = bpy.data.objects[context.scene.cage]
@@ -590,13 +527,6 @@ class PolyBake(bpy.types.Operator):
             bpy.context.scene.render.bake.use_cage = False
 
 
-
-
-
-
-
-
-    #11 bake all maps!
         if context.scene.bakeNormal:
 
             bpy.context.scene.cycles.samples = context.scene.samplesNormal
@@ -655,7 +585,7 @@ class PolyBake(bpy.types.Operator):
             bakeimage.file_format = 'TARGA'
             bakeimage.save()
 
-        #UV SNAPSHOT
+        
         if context.scene.bakeUV:
             bpy.ops.object.editmode_toggle()
             bpy.ops.mesh.select_all(action='SELECT')
@@ -668,7 +598,7 @@ class PolyBake(bpy.types.Operator):
 
 
 
-        #cleanup temporary objects and materials
+        
         bpy.ops.object.select_all(action='DESELECT')
         if not context.scene.lowpolyGroup:
             orig_lowpoly.select_set(state=True)
@@ -684,18 +614,18 @@ class PolyBake(bpy.types.Operator):
             bpy.ops.object.delete(use_global=False)
             
         if context.scene.UseLowOnly:
-            #bpy.ops.object.select_all(action='DESELECT')
+            
             context.scene.hipoly.select_set(state=True)
-            #return {'FINISHED'}
+            
             bpy.ops.object.delete(use_global=False)
-            #return {'FINISHED'}
+            
 
-        #reload all textures
+        
         for image in bpy.data.images:
             image.reload()
              
 
-        #rehide back to original state 
+        
         if context.scene.lowpolyActive is True:
             if context.scene.lowpoly is None:
                 for o in context.scene.lowpoly.objects:
@@ -703,7 +633,7 @@ class PolyBake(bpy.types.Operator):
                     context.view_layer.objects.active = o
             else:
                 context.scene.lowpoly.hide_viewport = False
-                #context.view_layer.objects.active = context.scene.lowpoly
+                
 
 
         else:
@@ -730,12 +660,6 @@ class PolyBake(bpy.types.Operator):
                     context.scene.hipoly.hide_viewport = True
 
         return {'FINISHED'}
-
-
-
-
-
-
 
 
 
