@@ -34,10 +34,5 @@ If you find any issues or have suggestions for improvements, feel free to create
 
 ## License
 
-PolyBake is licensed under the [MIT License](link-to-license).
+PolyBake is licensed under the [MIT License](LICENSE).
 
-## Support
-
-If you need any help or have questions, please reach out to us via [email@example.com](mailto:email@example.com) or open an issue.
-
-Happy baking with PolyBake!
