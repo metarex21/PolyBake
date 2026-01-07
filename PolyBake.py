@@ -566,6 +566,8 @@ class PolyBake(bpy.types.Operator):
         
         if context.scene.bakeRoughness:
 
+            bakeimage.colorspace_settings.name="Non-Color"
+
             bpy.context.scene.cycles.samples = context.scene.samplesRoughness
             bpy.ops.object.bake(type='ROUGHNESS', use_clear=True, use_selected_to_active=True)
             bakeimage.filepath_raw = context.scene.bakeFolder+context.scene.bakePrefix+context.scene.affixRoughness+".tga"
